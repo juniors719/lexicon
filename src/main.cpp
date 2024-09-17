@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
         lexicon.open_files();
         lexicon.run();
         lexicon.write_output();
+        std::cout << "Elapsed time: " << lexicon.elapsed_time() << "ms\n";
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
         return 1;

@@ -177,12 +177,26 @@ class Lexicon {
      * @throws std::runtime_error - Se o arquivo de saída não puder ser gerado.
      */
     void write_output() {
+        std::string dt = "";
+        if (dictionary_type == "avl")
+            dt = "Ávore AVL";
+        else if (dictionary_type == "rb")
+            dt = "Árvore Rubro-Negra";
+        else if (dictionary_type == "htc")
+            dt = "Tabela Hash com Encadeamento";
+        else if (dictionary_type == "hto")
+            dt = "Tabela Hash com Endereçamento Aberto";
+
         output_file.open(output_filename);
         if (!output_file.is_open()) {
             throw std::runtime_error("Falha ao gerar arquivo de saída");
         } else
             std::cout << "Arquivo de saída gerado com sucesso: " << output_filename << std::endl;
+        std::cout << "Tipo de dicionário: " << dt << "\n";
         output_file << "---------- LEXICON ----------\n\n";
+
+        output_file << "Tipo de dicionário: " << dt << "\n";
+
         output_file << "Número de palavras: " << dictionary->size() << "\n";
         output_file << "Tempo de execução: " << elapsed.count() << " ms\n";
         output_file << "Quantidade de comparações: " << dictionary->getComparisons() << std::endl;

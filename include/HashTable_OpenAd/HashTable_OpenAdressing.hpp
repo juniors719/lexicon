@@ -97,7 +97,17 @@ class HashTable_OpenAddressing {
      * @return size_t - índice da chave
      */
     size_t hash_code(const Key& k, size_t i) const {
-        return (m_hashing(k) + i) % m_table_size;  // Linear probing
+        return (m_hashing(k) + i * hash2(k)) % m_table_size;
+    }
+
+    /**
+     * @brief Função que retorna o índice da chave na tabela
+     *
+     * @param k chave
+     * @return size_t - índice da chave
+     */
+    size_t hash2(const Key& k) const {
+        return 1 + (m_hashing(k) % (m_table_size - 1));
     }
 
     /**
