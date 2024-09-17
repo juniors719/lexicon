@@ -1,0 +1,35 @@
+# Ignore arquivos binários e de build
+*.o
+*.out
+*.exe
+*.gch
+*.so
+*.a
+
+# Ignore pastas de build
+/build/
+/bin/
+/obj/
+
+# Ignore arquivos de log e temporários
+*.log
+*.tmp
+*.swp
+
+# Ignore pastas e arquivos de IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Ignore Makefiles gerados automaticamente
+Makefile
+
+# Ignore arquivos do CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Ignore arquivos de depuração
+*.dSYM/
+*.stackdump
+src/main
