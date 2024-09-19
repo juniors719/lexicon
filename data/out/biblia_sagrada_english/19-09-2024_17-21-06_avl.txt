@@ -1,9 +1,10 @@
 ---------- LEXICON ----------
 
-Tipo de dicionário: Tabela Hash com Endereçamento Aberto
+Tipo de dicionário: AVL
 Número de palavras: 16382
-Tempo de execução: 482 ms
-Quantidade de comparações: 2402495
+Tempo de execução: 851 ms
+Quantidade de comparações: 27643743
+Quantidade de rotações: 12216
 
 
 Palaras ordenadas:
