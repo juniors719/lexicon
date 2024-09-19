@@ -198,6 +198,8 @@ class HashTableC_Dictionary : public Dictionary {
         std::string output;
         std::vector<std::pair<icu::UnicodeString, size_t>> elements;
 
+        auto start = std::chrono::high_resolution_clock::now();
+
         // Inserindo os elementos da tabela em um vetor
         for (auto [key, value] : hashTable) {
             elements.emplace_back(key, value);
@@ -208,6 +210,10 @@ class HashTableC_Dictionary : public Dictionary {
             UnicodeCompare cmp;
             return cmp(a.first, b.first);
         });
+
+        auto finish = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start);
+        std::cout << "Ordenation elapsed time: " << elapsed.count() << " ms" << std::endl;
 
         // Gerando a saída
         for (auto& [key, value] : elements) {
@@ -260,6 +266,8 @@ class HashTableOA_Dictionary : public Dictionary {
         std::string output;
         std::vector<std::pair<icu::UnicodeString, size_t>> elements;
 
+        auto start = std::chrono::high_resolution_clock::now();
+
         // Inserindo os elementos da tabela em um vetor
         for (auto [key, value] : hashTable) {
             elements.emplace_back(key, value);
@@ -270,6 +278,10 @@ class HashTableOA_Dictionary : public Dictionary {
             UnicodeCompare cmp;
             return cmp(a.first, b.first);
         });
+
+        auto finish = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start);
+        std::cout << "Ordenation elapsed time: " << elapsed.count() << " ms" << std::endl;
 
         // Gerando a saída
         for (auto& [key, value] : elements) {

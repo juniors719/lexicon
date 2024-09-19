@@ -31,11 +31,17 @@
  * o número de palavras, comparações e rotações (se aplicável).
  */
 class Lexicon {
+    enum class DictionaryType { AVL,
+                                RB,
+                                HTC,
+                                HTO
+    };
+
     std::ifstream input_file;           // Arquivo de entrada para leitura das palavras
     std::ofstream output_file;          // Arquivo de saída para escrita das palavras ordenadas
     std::string input_filename;         // Nome do arquivo de entrada
     std::string output_filename;        // Nome do arquivo de saída
-    std::string dictionary_type;        // Tipo de dicionário utilizado ("avl", "rb", "htc", "hto")
+    DictionaryType dict_type;           // Tipo de dicionário a ser utilizado
     std::chrono::milliseconds elapsed;  // Tempo para processamento das palavras e criação do dicionário,
                                         // sem considerar a escrita do arquivo de saída e ordenação (casos da HashTable)
 
@@ -111,16 +117,20 @@ class Lexicon {
      * @param dictionary_type Tipo de dicionário a ser usado ("avl", "rb", "htc", "hto").
      * @throws std::runtime_error - Se o tipo de dicionário for inválido.
      */
-    Lexicon(std::string inp_file, std::string dictionary_type) : dictionary_type(dictionary_type) {
-        if (dictionary_type == "avl")
+    Lexicon(std::string inp_file, std::string dictionary_type) {
+        if (dictionary_type == "avl") {
+            dict_type = DictionaryType::AVL;
             dictionary = new AVL_Dictionary();
-        else if (dictionary_type == "rb")
+        } else if (dictionary_type == "rb") {
+            dict_type = DictionaryType::RB;
             dictionary = new RB_Dictionary();
-        else if (dictionary_type == "htc")
+        } else if (dictionary_type == "htc") {
+            dict_type = DictionaryType::HTC;
             dictionary = new HashTableC_Dictionary();
-        else if (dictionary_type == "hto")
+        } else if (dictionary_type == "hto") {
+            dict_type = DictionaryType::HTO;
             dictionary = new HashTableOA_Dictionary();
-        else
+        } else
             throw std::runtime_error("Tipo de dicionário inválido");
         this->input_filename = "../data/in/" + inp_file;
         this->output_filename = "../data/out/" + create_filename() + "_" + dictionary_type + ".txt";
@@ -177,14 +187,15 @@ class Lexicon {
      * @throws std::runtime_error - Se o arquivo de saída não puder ser gerado.
      */
     void write_output() {
+        // dictionary->show();
         std::string dt = "";
-        if (dictionary_type == "avl")
-            dt = "Ávore AVL";
-        else if (dictionary_type == "rb")
-            dt = "Árvore Rubro-Negra";
-        else if (dictionary_type == "htc")
+        if (dict_type == DictionaryType::AVL)
+            dt = "AVL";
+        else if (dict_type == DictionaryType::RB)
+            dt = "Rubro-Negra";
+        else if (dict_type == DictionaryType::HTC)
             dt = "Tabela Hash com Encadeamento";
-        else if (dictionary_type == "hto")
+        else if (dict_type == DictionaryType::HTO)
             dt = "Tabela Hash com Endereçamento Aberto";
 
         output_file.open(output_filename);
@@ -200,7 +211,7 @@ class Lexicon {
         output_file << "Número de palavras: " << dictionary->size() << "\n";
         output_file << "Tempo de execução: " << elapsed.count() << " ms\n";
         output_file << "Quantidade de comparações: " << dictionary->getComparisons() << std::endl;
-        if (dictionary_type == "avl" || dictionary_type == "rb") {
+        if (dict_type == DictionaryType::AVL || dict_type == DictionaryType::RB) {
             output_file << "Quantidade de rotações: " << dictionary->getRotations() << std::endl;
         }
         output_file << "\n\nPalaras ordenadas:\n\n";

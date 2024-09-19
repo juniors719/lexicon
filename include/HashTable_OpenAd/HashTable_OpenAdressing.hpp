@@ -97,7 +97,7 @@ class HashTable_OpenAddressing {
      * @return size_t - índice da chave
      */
     size_t hash_code(const Key& k, size_t i) const {
-        return (m_hashing(k) + i * hash2(k)) % m_table_size;
+        return (m_hashing(k) + i) % m_table_size;
     }
 
     /**
@@ -106,9 +106,9 @@ class HashTable_OpenAddressing {
      * @param k chave
      * @return size_t - índice da chave
      */
-    size_t hash2(const Key& k) const {
+    /* size_t hash2(const Key& k) const {
         return 1 + (m_hashing(k) % (m_table_size - 1));
-    }
+    } */
 
     /**
      * @brief Função que realoca a tabela
@@ -123,12 +123,11 @@ class HashTable_OpenAddressing {
                 size_t index;
                 do {
                     ++_n_comparisons;
-                    index = (m_hashing((*m_table)[i].key) + j) % new_size;
+                    index = (m_hashing((*m_table)[i].key) + j) % new_size;  // Linear probing
                     j++;
                 } while ((*new_table)[index].state == OCCUPIED);
                 (*new_table)[index] = std::move((*m_table)[i]);
             }
-            ++_n_comparisons;
         }
         delete m_table;
         m_table = new_table;
@@ -229,11 +228,11 @@ class HashTable_OpenAddressing {
                 return true;
             } else if ((*m_table)[index].state == OCCUPIED && (*m_table)[index].key == k) {
                 ++_n_comparisons;
-                return false;
+                return false;  // Chave já existe, não deve adicionar
             }
             i++;
         } while (i < m_table_size);
-        return false;
+        return false;  // Tabela cheia, não conseguiu adicionar
     }
 
     /**

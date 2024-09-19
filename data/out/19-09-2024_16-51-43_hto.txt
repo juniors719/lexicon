@@ -1,10 +1,9 @@
 ---------- LEXICON ----------
 
-Tipo de dicionário: Ávore AVL
+Tipo de dicionário: Tabela Hash com Endereçamento Aberto
 Número de palavras: 16382
-Tempo de execução: 977 ms
-Quantidade de comparações: 27643743
-Quantidade de rotações: 12216
+Tempo de execução: 506 ms
+Quantidade de comparações: 2402495
 
 
 Palaras ordenadas:

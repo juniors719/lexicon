@@ -1,9 +1,10 @@
 ---------- LEXICON ----------
 
-Tipo de dicionário: Tabela Hash com Encadeamento
+Tipo de dicionário: Rubro-Negra
 Número de palavras: 16382
-Tempo de execução: 538 ms
-Quantidade de comparações: 975536
+Tempo de execução: 816 ms
+Quantidade de comparações: 30092314
+Quantidade de rotações: 10310
 
 
 Palaras ordenadas:

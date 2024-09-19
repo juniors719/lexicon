@@ -1,10 +1,9 @@
 ---------- LEXICON ----------
 
-Tipo de dicionário: Árvore Rubro-Negra
+Tipo de dicionário: Tabela Hash com Endereçamento Aberto
 Número de palavras: 16382
-Tempo de execução: 874 ms
-Quantidade de comparações: 30092314
-Quantidade de rotações: 10310
+Tempo de execução: 482 ms
+Quantidade de comparações: 2402495
 
 
 Palaras ordenadas:
