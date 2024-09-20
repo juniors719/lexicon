@@ -26,27 +26,15 @@
  * utilizando a biblioteca ICU. Atualmente, inclui uma sobrecarga do operador de inserção
  * para a classe `icu::UnicodeString`.
  */
-namespace icu_74 {
 
-/**
- * @brief Sobrecarga do operador de inserção para `icu::UnicodeString`.
- *
- * Este operador permite que objetos da classe `icu::UnicodeString` sejam enviados para fluxos
- * de saída, como `std::cout`, convertendo internamente a string Unicode para uma `std::string` codificada
- * em UTF-8.
- *
- * @param os stream de saída
- * @param u_string string Unicode a ser inserida no stream
- * @return std::ostream& - referência para o stream de saída
- */
+namespace icu_75 {
 std::ostream& operator<<(std::ostream& os, const UnicodeString& u_string) {
     std::string str;
     u_string.toUTF8String(str);
     os << str;
     return os;
 }
-
-}  // namespace icu_74
+}  // namespace icu_75
 
 /**
  * @brief Estrutura que fornece uma função de hash para strings Unicode.

@@ -407,7 +407,7 @@ class RBTree {
 
         if (z != _NIL) {
             _remove(z);
-            _size--;
+            m_size--;
         }
         ++_n_comparisons;
     }
